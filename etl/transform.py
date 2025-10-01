@@ -36,14 +36,16 @@ def filter_rows(raw_data):
     df = raw_data[raw_data['EmploymentStatus'] == 'Yes']
     return df
 
+def lowercase_all_columns(raw_data):
+    # lower case all col names 
+    raw_data.columns = raw_data.columns.str.lower()
+    return raw_data
 
 def transform_data(raw_data):    
     #df_transformed = raw_data
-    transformations = [column_selection,data_type_transformation,rename_column,filter_rows]
+    transformations = [column_selection,data_type_transformation,rename_column,filter_rows,lowercase_all_columns]
     df_final = raw_data
     for step in transformations:
         df_final = step(df_final)
 
     return df_final
-data = transform_data(df)
-print(data.head().info())
