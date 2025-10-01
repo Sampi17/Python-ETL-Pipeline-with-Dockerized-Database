@@ -1,0 +1,40 @@
+
+
+services:
+  postgres:
+    image: postgres:17
+    hostname: container-host
+    env_file: .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  etl:
+    build: ./etl
+    image: etl-pipeline:latest
+    env_file: .env
+    volumes:
+      - ./etl:/app       # mount Python code (hot reload your scripts)
+      - etl_data:/raw   # persist CSV files in a volume
+    working_dir: /app
+    depends_on:
+      - postgres
+    command: python etl_pipeline.py
+    
+  pgadmin:
+      image: dpage/pgadmin4
+      container_name: pgadmin
+      environment:
+        PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}  
+        PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+
+      ports:
+        - "5050:80"
+      depends_on:
+        - postgres
+
+volumes:
+  postgres_data:
+  etl_data:
+
