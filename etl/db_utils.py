@@ -36,16 +36,16 @@ def create_table():
         with engine.begin() as conn:
             conn.execute(text(
                  """CREATE TABLE IF NOT EXISTS employee_data (
-                        EmpID VARCHAR(50) PRIMARY KEY,
-                        Age INTEGER NOT NULL,
-                        Gender VARCHAR(20) NOT NULL,
-                        EmploymentStatus VARCHAR(10) NOT NULL,
-                        BusinessTravel VARCHAR(50) NOT NULL,
-                        Department VARCHAR(100) NOT NULL,
-                        Education INTEGER NOT NULL,
-                        EducationField VARCHAR(100) NOT NULL,
-                        JobRole VARCHAR(100) NOT NULL,
-                        YearsAtCompany INTEGER NOT NULL
+                        empid  VARCHAR(50) PRIMARY KEY,
+                        age INTEGER NOT NULL,
+                        gender VARCHAR(20) NOT NULL,
+                        employmentstatus VARCHAR(10) NOT NULL,
+                        businesstravel VARCHAR(50) NOT NULL,
+                        department VARCHAR(100) NOT NULL,
+                        education INTEGER NOT NULL,
+                        educationfield VARCHAR(100) NOT NULL,
+                        jobrole VARCHAR(100) NOT NULL,
+                        yearsatcompany INTEGER NOT NULL
                     );"""
             ))
         print("Table created or already exists")

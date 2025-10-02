@@ -1,6 +1,5 @@
 import pandas as pd
-df = pd.read_csv('raw/HR_Analytics.csv')
-#file path
+
 def column_selection(raw_data):
 #def transform_data(df):
     #Select columns of interest for this dataset
